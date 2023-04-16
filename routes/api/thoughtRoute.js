@@ -2,6 +2,9 @@
 // formatted JSON
 // if user status is author allow update/delete, else don't
 
+const router = request('express').Router();
+
+
 // GET all thoughts
 // CREATE a new thought
 // UPDATE-POST an existing thought
@@ -16,3 +19,5 @@
 
 // DELETE specific thought
 // DELETE all thoughts
+
+module.exports = router;

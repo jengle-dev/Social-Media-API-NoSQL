@@ -40,7 +40,8 @@ If there are issues with the site, please reach out to me, Jennifer Engle, at j.
 
 ## References
 * https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb
-
+* https://mongoosejs.com/docs/validation.html
+* https://masteringjs.io/tutorials/mongoose/mongoose-validate-unique-email
 
 ## License
 
