@@ -2,7 +2,7 @@
 // This will have a subdocument schema of Reaction
 
 const { Schema, Types } = require('mongoose');
-const reactionSchema = require('./Reaction');
+const Reaction = require('./Reaction');
 
 const thoughtSchema = new Schema(
     {

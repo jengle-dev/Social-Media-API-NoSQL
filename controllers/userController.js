@@ -15,7 +15,6 @@ const totalUsers = async () => {
     return numberOfUsers;
 };
 
-
 module.exports = {
     // Get all users
     async getAllUsers(req, res) {
@@ -35,7 +34,7 @@ module.exports = {
     async getSingleUser(req, res) {
         try {
             const user = await User.findOne({
-                _id: req.params.username }) //may want to change from username to userId if one is given. need to test routes
+                username: req.params.username }) //may want to change from username to userId if one is given. need to test routes
                 .select('-__v')
                 .lean();
             
@@ -47,6 +46,92 @@ module.exports = {
                 user,
 
             })
-        }
+       
+        //need a catch 
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json(err);
+          }
+        },
+
+        // create a new user
+  async createUser(req, res) {
+    try {
+      const user = await User.create(req.body);
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
     }
-}
+  },
+  // Delete a student and remove them from the course
+  async deleteUser(req, res) {
+    try {
+      const user = await User.findOneAndRemove({ username: req.params.username });
+
+      if (!user) {
+        return res.status(404).json({ message: `This username, ${username}, does not exist.` }) //do template literals work here?
+      }
+
+      const thought = await Thought.findOneAndUpdate(
+        { username: req.params.username },
+        { $pull: { username: req.params.username } },
+        { new: true }
+      );
+
+      if (!thought) {
+        return res.status(404).json({
+          message: `${username} is invalid and no thoughts found.`,
+        });
+      }
+
+      res.json({ message: `User ${username} is successfully deleted.` });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+  // Add a new thought for a user
+  async addThought(req, res) {
+    try {
+      console.log('You are adding a new thought');
+      console.log(req.body);
+      const thought = await Thought.findOneAndUpdate(
+        { username: req.params.username },
+        { $addToSet: { thoughtText: req.body } },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: `${username} is invalid and no thoughts can be added.` })
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  // Remove thought from a user
+  async removeThought(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { username: req.params.username },
+        { $pull: { thought: { thoughtText: req.params.thoughtText } } },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: `${username} is invalid and no thoughts found.` });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+};
+

@@ -2,7 +2,7 @@
 // formatted JSON
 // if user status is author allow update/delete, else don't
 
-const router = request('express').Router();
+const router = require('express').Router();
 
 
 // GET all thoughts
