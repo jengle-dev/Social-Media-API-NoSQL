@@ -1,4 +1,4 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
 const reactionSchema = new Schema(
     {
@@ -11,7 +11,13 @@ const reactionSchema = new Schema(
             required: true,
             maxlength: 280,
         },
-        // do I need this here? or should it be used from the Thought model?
+        username: {
+            type: String,
+            unique: true,
+            required: true,
+            min_lenth: [8, 'Must be at least 8 characters long. {VALUE} received.'],
+            max_length: 30,
+        },        
         createdAt: {
             type: Date,
             default: Date.now,
@@ -25,6 +31,4 @@ const reactionSchema = new Schema(
     },
 );
 
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;

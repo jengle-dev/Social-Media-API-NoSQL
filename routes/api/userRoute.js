@@ -17,16 +17,16 @@ const {
     deleteReaction,
 } = require ('../../controllers/userController');
 
-// /api/user
-// GET specific user create a new user
+// /api/users
+// GET specific user or create a new user
 // New user requires username & email and both are unique
-router.route('/').get(username).post(createUser);
+router.route('/').get(getAllUsers).post(createUser);
 
 // GET all users & all thoughts/posts
 // GET all users & all thoughts/posts and filter by Date?
 
 // GET specific user getSingleUser to delete that user
-router.route('/:username').get(username).delete(deleteUser);
+// router.route('/:username').get(username).delete(deleteUser);
 // GET specific users & all thoughts/posts
 // GET specific users & specific thought/post
 // GET specific users & specific thought/post and update
@@ -43,14 +43,14 @@ router.route('/:username').get(username).delete(deleteUser);
 
 // DELETE specific user & all thoughts & all reactions they have posted and all reactions posted to their thoughts
 // TODO: Add Delete route that uses a filter to delete a single user by id/username
-app.delete('/delete', (req, res) => {
-    const bookId = new ObjectId(req.body.id)
-    db.collection('bookCollection')
-    .deleteOne({ _id: bookId })
-    .then(results => res.json(results))
-    .catch(err => {
-      if (err) throw err;
-    });
-  });
+// app.delete('/delete', (req, res) => {
+//     const bookId = new ObjectId(req.body.id)
+//     db.collection('bookCollection')
+//     .deleteOne({ _id: bookId })
+//     .then(results => res.json(results))
+//     .catch(err => {
+//       if (err) throw err;
+//     });
+//   });
 
 module.exports = router;
