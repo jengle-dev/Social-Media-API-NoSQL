@@ -19,23 +19,22 @@ const {
 
 // /api/users
 // GET specific user or create a new user
+// CREATE new user
 // New user requires username & email and both are unique
 router.route('/').get(getAllUsers).post(createUser);
 
 // GET all users & all thoughts/posts
 // GET all users & all thoughts/posts and filter by Date?
 
-// GET specific user getSingleUser to delete that user
-// router.route('/:username').get(username).delete(deleteUser);
+// GET specific user getSingleUser and ability to delete that specific user
+router.route('/').get(getSingleUser).delete(deleteUser);
+
 // GET specific users & all thoughts/posts
 // GET specific users & specific thought/post
 // GET specific users & specific thought/post and update
 // GET specific users & specific thought/post and delete
 
 // GET getuserFriends
-
-// CREATE new user
-// New user requires username & email and both are unique
 
 // CREATE new thought
 
