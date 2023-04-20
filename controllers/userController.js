@@ -34,7 +34,7 @@ module.exports = {
     async getSingleUser(req, res) {
         try {
             const user = await User.findOne({
-                username: req.params.username }) //may want to change from username to userId if one is given. need to test routes
+                _id: req.params._id }) //may want to change from username to userId if one is given. need to test routes
                 .select('-__v')
                 .lean();
             
@@ -44,7 +44,6 @@ module.exports = {
 
             res.json({
                 user,
-
             })
        
         //need a catch 
@@ -53,6 +52,30 @@ module.exports = {
             return res.status(500).json(err);
           }
         },
+// get 1 and update user by id
+        async updateUserData(req, res) {
+          try {
+              const user = await User.findOneAndUpdate({
+                  _id: req.params._id },
+                  {$set:req.body},
+                  {runValidators: true, new: true}) 
+                  .select('-__v')
+                  .lean();
+              
+              if (!user) {
+                  return res.status(404).json({ message: 'No user with that ID or username found.'});
+              }
+  
+              res.json({
+                  user,
+              })
+         
+          //need a catch 
+          } catch (err) {
+              console.log(err);
+              return res.status(500).json(err);
+            }
+          },
 
         // create a new user
   async createUser(req, res) {
