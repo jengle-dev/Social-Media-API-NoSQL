@@ -28,12 +28,16 @@ This application uses Node.js, Express.js, Mongoose.js and a NoSQL database with
 ## Mock-up/Recording
 The following animations show examples of the application's API routes being tested in Insomnia.
 
-* Link to Video
-* Image of Terminal Running Server
-* Image of Insomnia "GET"
-* Image of Insomnia "POST"
-* Image of Insomnia "DELETE"
-* Image of Insomnia "UPDATE"
+### Creating New User
+<img src="assets\images\NewUser.png">
+
+### Confirming New User in Get All Users
+<img src="assets\images\NewUserInList.png">
+
+
+### Link to Video: 
+https://drive.google.com/file/d/1DCyaDD8CXXNJfbt_kc5Lik2xqWJHLRke/view 
+
 
 ## Support
 If there are issues with the site, please reach out to me, Jennifer Engle, at j.engle.dev@gmail.com and reference the site's URL. Please provide any screenshots and behavior along with your browser information.
@@ -45,9 +49,13 @@ If there are issues with the site, please reach out to me, Jennifer Engle, at j.
 * Class Activity 6
 
 ## License
+None
 
 ## Project Status
+In progress
 
 ## Authors & Acknowledgement
+Jennifer Engle
+
 
 - GitHub @jengle-dev https://github.com/jengle-dev

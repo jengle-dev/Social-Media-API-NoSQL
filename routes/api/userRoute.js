@@ -4,56 +4,40 @@
 const router = require('express').Router();
 
 const {
+    addFriend,
+    deleteFriend
+} = require ('../../controllers/usersFriends')
+
+const {
     getAllUsers,
     getSingleUser,
-    getUserFriends,
     createUser,
-    updateFriends,
     deleteUser,
-    deleteFriend,
-    createThought,
     createReaction,
-    deleteThought,
     deleteReaction,
-    updateUser
+    updateUserData,
 } = require ('../../controllers/userController');
 
 // /api/users
-// GET specific user or create a new user
+
 // CREATE new user
 // New user requires username & email and both are unique
 router.route('/').get(getAllUsers).post(createUser);
 
-// GET all users & all thoughts/posts
-// GET all users & all thoughts/posts and filter by Date?
-
 // GET specific user getSingleUser and ability to delete that specific user
 router.route('/:_id').get(getSingleUser);
-// .delete(deleteUser);
 
-// GET specific users & all thoughts/posts
-// GET specific users & specific thought/post
-// GET specific users & specific thought/post and update
-// GET specific users & specific thought/post and delete
 // PUT Update User using ID to search
 router.route('/:_id').put(updateUserData);
 
-// GET getuserFriends
+// .delete(deleteUser);
+router.route('/:_id').delete(deleteUser);
 
-// CREATE new thought
+//POST a friend to a user
+router.route('/:userId/friends/:friendId').post(addFriend);
 
-// GET specific user and select a thought to POST a reaction
+// Delete a friend from a user's list of friends
+router.route('/:userId/friends/:friendId').delete(deleteFriend);
 
-// DELETE specific user & all thoughts & all reactions they have posted and all reactions posted to their thoughts
-// TODO: Add Delete route that uses a filter to delete a single user by id/username
-// app.delete('/delete', (req, res) => {
-//     const bookId = new ObjectId(req.body.id)
-//     db.collection('bookCollection')
-//     .deleteOne({ _id: bookId })
-//     .then(results => res.json(results))
-//     .catch(err => {
-//       if (err) throw err;
-//     });
-//   });
 
 module.exports = router;

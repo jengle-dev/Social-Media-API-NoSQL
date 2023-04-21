@@ -15,12 +15,7 @@ const userSchema = new Schema (
             type: String,
             unique: true,
             required: true,
-            //look at Mongoose's matching validation
-            // validate: {
-            //     validator: () => Promise.resolve(false),
-            //     message: 'Email validation failed.'
-            // }
-            //match: /.+\@.+\..+/,
+
         },
         thoughts: [{
             type: Schema.Types.ObjectId,
