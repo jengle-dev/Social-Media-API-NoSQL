@@ -13,7 +13,7 @@ const reactionSchema = new Schema(
         },
         username: {
             type: String,
-            unique: true,
+            unique: false,
             required: true,
             min_lenth: [8, 'Must be at least 8 characters long. {VALUE} received.'],
             max_length: 30,
