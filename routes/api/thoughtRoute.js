@@ -13,12 +13,12 @@ const {
 } = require ('../../controllers/thoughtController')
 //Thoughts Model requires: thoughtID, thoughtText, username
 
-// GET specific thought 
 // GET ALL thoughts
 // CREATE a New thought
+router.route('/').get(getAllThoughts).post(createThought);
+// GET a specific thought
 // DELETE a specific thought
-
-
+router.route('/:_id').get(getOneThought).delete(deleteThought);
 // future-state UPDATE-POST an existing thought
 
 // CREATE a new reaction to another user's thought
