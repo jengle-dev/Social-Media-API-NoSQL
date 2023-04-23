@@ -1,54 +1,60 @@
 
 const { ObjectId } = require('mongoose').Types;
-const { User, Thought } = require ('../models');
+const { User, Thought } = require('../models');
 
 module.exports = {
-//get all thoughts
-    async getAllThoughts(req, res) {
-        try {
-            const users = await User.find();
-            const userObj = {
-                users,
-                totalUsers: await totalUsers(),
-            };
-            return res.json(userObj);
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json(err);
-        }
-    },
+  // GET all thoughts for a specific user
+  async getAllThoughts(req, res) {
+    try {
+      const users = await User.find();
+      return res.json(userObj);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  },
+  // GET a single thought for a user
+  async getOneThought(req, res) {
+    try { 
+      const users = await User.findOne();
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  },
 
-  // Add a new thought for a user
-  async addThought(req, res) {
+  // CREATE a new thought for a user
+  async createThought(req, res) {
     try {
       console.log('You are adding a new thought');
       console.log(req.body);
-      const thought = await Thought.findOneAndUpdate(
-        { username: req.params.username },
-        { $addToSet: { thoughtText: req.body } },
+      const newThought = await Thought.create(req.body);
+      const userThought = await User.findOneAndUpdate(
+        { _id: req.body.userId },
+        { $push: { thoughts: newThought._id } },
         { runValidators: true, new: true }
       );
 
-      if (!user) {
+      if (!userThought) {
         return res
           .status(404)
           .json({ message: `${username} is invalid and no thoughts can be added.` })
       }
 
-      res.json(user);
+      res.json(userThought);
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
-  // Remove thought from a user
-  async removeThought(req, res) {
+  // Delete thought from a user
+  async deleteThought(req, res) {
     try {
-      const user = await User.findOneAndUpdate(
+      const user = await Thought.findOneAndUpdate(
         { username: req.params.username },
         { $pull: { thought: { thoughtText: req.params.thoughtText } } },
         { runValidators: true, new: true }
-      ); 
+      );
 
       if (!user) {
         return res
