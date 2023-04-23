@@ -28,19 +28,20 @@ module.exports = {
     try {
       console.log('You are adding a new thought');
       console.log(req.body);
-      const newThought = await Thought.findOneAndUpdate(
-        { username: req.params.username },
-        { $addToSet: { thoughtText: req.body } },
+      const newThought = await Thought.create(req.body);
+      const userThought = await User.findOneAndUpdate(
+        { _id: req.body.userId },
+        { $push: { thoughts: newThought._id } },
         { runValidators: true, new: true }
       );
 
-      if (!user) {
+      if (!userThought) {
         return res
           .status(404)
           .json({ message: `${username} is invalid and no thoughts can be added.` })
       }
 
-      res.json(user);
+      res.json(userThought);
     } catch (err) {
       res.status(500).json(err);
     }
