@@ -13,8 +13,6 @@ const {
     getSingleUser,
     createUser,
     deleteUser,
-    createReaction,
-    deleteReaction,
     updateUserData,
 } = require ('../../controllers/userController');
 
