@@ -1,6 +1,11 @@
 //CRUD - Create, Read , Update, Delete
 const router = require('express').Router();
 
+
+// api/thoughts
+
+// GET all thoughts
+// CREATE a new thought
 const {
     addThought,
     removeThought,
@@ -8,17 +13,14 @@ const {
     getOneThought
 } = require ('../../controllers/thoughtController')
 
-// api/thoughts
-
-// GET all thoughts
-// CREATE a new thought
-// Delete a thought
-// get one thought
-// router.route('/').post(addThought).delete(removeThought).get(getOneThought);
-
 // future state UPDATE-POST an existing thought
 
 // CREATE a new reaction to another user's thought
+const {
+    addReaction,
+    getAllReactions,
+    removeReaction,
+}
 // CREATE a new reaction to same user's thought
 
 // UPDATE-POST an existing reaction to a thought
